@@ -9,13 +9,6 @@
       :filter="filter"
       class="text-black"
     >
-      <template v-slot:top-right>
-        <q-input borderless dense debounce="300" v-model="filter" placeholder="Search">
-          <template v-slot:append>
-            <q-icon name="search" />
-          </template>
-        </q-input>
-      </template>
       <template v-slot:item="props">
           <div :props="props">
         <!-- CALENDER NFL -->
@@ -58,6 +51,7 @@
 </template>
 
 <script>
+import {mapActions, mapGetters} from "vuex";
 export default {
     props: {
         sport: {
@@ -81,6 +75,49 @@ export default {
       ],
       data: []
     }
+  },
+  async mounted() {
+    await this.fetchNflSchedule();
+    await this.fetchNbaSchedule();
+    await this.fetchNhlSchedule();
+    await this.getAllSchedules();
+  },
+  watch : {
+      sport: function() {
+          this.getAllSchedules();
+      },
+  },
+  computed: {
+      ...mapGetters(['fetchNflSchedules', 'fetchNbaSchedules', 'fetchNhlSchedules'])
+  },
+  methods: {
+     ...mapActions(['fetchNflSchedule','fetchNbaSchedule', 'fetchNhlSchedule']),
+     getAllSchedules() {
+         if (this.sport === 'NFL') {
+             console.log("THIS.SPORT", this.sport)
+             this.getAllNflSchedule();
+         } else if (this.sport === 'NBA') {
+             this.getAllNbaSchedule();
+         } else if (this.sport === "NHL"){
+             this.getAllNhlSchedule();
+         }
+     },
+      getAllNflSchedule() {
+         let nflSchedule = this.fetchNflSchedules;
+         console.log("NFL", nflSchedule);
+         this.data = nflSchedule
+     },
+        getAllNbaSchedule() {
+         let nbaSchedule = this.fetchNbaSchedules;
+         console.log("NBA", nbaSchedule);
+         this.data = nbaSchedule
+     },
+         getAllNhlSchedule() {
+         let nhlSchedule = this.fetchNhlSchedules;
+         console.log("NHL", nhlSchedule);
+         this.data = nhlSchedule
+     }
+     
   }
 }
 </script>

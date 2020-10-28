@@ -5,6 +5,8 @@
 npm install -g @vue/cli
 vue create {project name}
 vue add quasar
+npm install --save vuex
+npm install axios
 <!-- INSTALL JSON SERVER MOCK API AND JSON DATA -->
 npm install -g json-server
     --run server mock data: json-server --watch db.json

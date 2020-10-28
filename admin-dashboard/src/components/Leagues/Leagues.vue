@@ -21,7 +21,7 @@
                 <q-item-label>NFL</q-item-label>
             </q-item-section>
             </q-item>
-            <q-item clickable @click="onItemClick('NBA')">
+            <q-item clickable v-close-popup @click="onItemClick('NBA')">
             <q-item-section avatar>
                 <q-avatar icon="fas fa-basketball-ball" color="red" text-color="white" />
             </q-item-section>
@@ -29,7 +29,7 @@
                 <q-item-label>NBA</q-item-label>
             </q-item-section>
             </q-item>
-            <q-item clickable @click="onItemClick('NHL')">
+            <q-item clickable v-close-popup @click="onItemClick('NHL')">
             <q-item-section avatar>
                 <q-avatar icon="fas fa-hockey-puck" color="secondary" text-color="white" />
             </q-item-section>
@@ -74,16 +74,31 @@
             </q-tab-panel>
 
             <q-tab-panel class="text-margin" name="teams">
-                <div class="text-h4 text-black q-mb-md">Teams</div>
+                <template v-if="dropdownName === 'NFL'|| dropdownName === 'NBA' || dropdownName === 'NHL'">
+                <div class="text-h4 text-black q-mb-md"> {{dropdownName}} Teams</div>
                 <p class="text-black">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
                 <p class="text-black">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+                </template>
+                   <template v-else>
+                <div class="text-h4 text-black q-mb-md"> Teams</div>
+                <p class="text-black">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+                <p class="text-black">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+                </template>
             </q-tab-panel>
 
             <q-tab-panel class="text-margin" name="athletics">
+                <template  v-if="dropdownName === 'NFL'|| dropdownName === 'NBA' || dropdownName === 'NHL'">
+                <div class="text-h4 text-black q-mb-md">{{dropdownName}} Athletics</div>
+                <p class="text-black">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+                <p class="text-black">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+                <p class="text-black">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+                </template>
+                <template  v-else>
                 <div class="text-h4 text-black q-mb-md">Athletics</div>
                 <p class="text-black">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
                 <p class="text-black">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
                 <p class="text-black">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+                </template>
             </q-tab-panel>
             </q-tab-panels>
         </template>
