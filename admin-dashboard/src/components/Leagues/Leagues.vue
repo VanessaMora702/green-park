@@ -13,7 +13,7 @@
             :label="button === false ? 'LEAGUE SELECTORS' : dropdownName"
             >
         <q-list>
-            <q-item clickable @click="onItemClick('NFL')">
+            <q-item clickable v-close-popup @click="onItemClick('NFL') ">
             <q-item-section avatar>
                 <q-avatar icon="fas fa-football-ball" color="primary" text-color="white" />
             </q-item-section>
@@ -63,9 +63,14 @@
             class="container"
             >
             <q-tab-panel class="text-margin" name="schedule">
+                <template v-if="dropdownName === 'NFL'|| dropdownName === 'NBA' || dropdownName === 'NHL'">
+                <ScheduleTable :sport ='dropdownName'/>
+                </template>
+                <template v-else>
                 <div class="text-h4 text-black q-mb-md">Schedule</div>
                 <p class="text-black">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
                 <p class="text-black">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+                </template>
             </q-tab-panel>
 
             <q-tab-panel class="text-margin" name="teams">
@@ -87,7 +92,11 @@
 </template>
 
 <script>
+import ScheduleTable from './ScheduleTable/table';
 export default {
+    components: {
+        ScheduleTable,
+    },
     data() {
         return {
         innerTab: 'schedule',
