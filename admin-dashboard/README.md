@@ -5,6 +5,7 @@
 npm install -g @vue/cli
 vue create {project name}
 vue add quasar
+
 ```
 
 ### Compiles and hot-reloads for development
