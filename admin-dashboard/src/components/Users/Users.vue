@@ -1,5 +1,6 @@
 <template>
   <div >
+    <router-view/>
     <q-splitter
         v-model="splitterModel"
         >
@@ -49,6 +50,7 @@
 
 <script>
 export default {
+    name: 'users',
     data() {
         return {
         innerTab: 'userProfile',

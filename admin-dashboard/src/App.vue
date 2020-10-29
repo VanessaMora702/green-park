@@ -1,4 +1,6 @@
 <template>
+  <div>
+  <router-view/>
   <q-layout view="lHh Lpr lFf">
     <q-header elevated class="glossy">
         <q-toolbar class="background-color glossy text-white">
@@ -6,16 +8,15 @@
         <img :src="('https://greenparksports.com/current/static/media/logo.7d66f9bf.svg')" >
       </q-avatar>
       <q-tabs
-        v-model="tab"
         dense
         class="text-white q-ml-xl"
         active-color="yellow"
         indicator-color="primary"
         align="justify"
       >
-        <q-tab name="Users" label="Users"/>
-        <q-tab name="Leagues" label="Leagues" />
-        <q-tab name="Analytics" label="Analytics" />
+          <q-route-tab class="text-white" name="Users" label="Users" to="users"/>
+          <q-route-tab class="text-white" name="Leagues" label="Leagues" to="leagues"/>
+          <q-route-tab class="text-white" name="Analytics" label="Analytics" to="analytics" />
       </q-tabs>
     </q-toolbar>
     <!-- Q-TAB-PANELS -->
@@ -34,16 +35,15 @@
     <q-page-container>
     </q-page-container>
   </q-layout>
+  </div>
 </template>
 
 <script>
 import Users from './components/Users/Users'
 import Leagues from './components/Leagues/Leagues'
 import Analytics from './components/Analytics/Analytics'
-
 export default {
   name: 'LayoutDefault',
-
   components: {
     Users,
     Leagues,
@@ -54,7 +54,7 @@ export default {
     return {
       tab: 'Users'
     }
-  }
+  },
 }
 </script>
 
@@ -62,4 +62,7 @@ export default {
 .background-color {
   background: #001f4f; 
 } 
+.link-color {
+  color: transparent;
+}
 </style>

@@ -94,7 +94,6 @@ export default {
      ...mapActions(['fetchNflSchedule','fetchNbaSchedule', 'fetchNhlSchedule']),
      getAllSchedules() {
          if (this.sport === 'NFL') {
-             console.log("THIS.SPORT", this.sport)
              this.getAllNflSchedule();
          } else if (this.sport === 'NBA') {
              this.getAllNbaSchedule();

@@ -1,19 +1,21 @@
 <template>
   <div >
+    <router-view/>
     <q-splitter
         v-model="splitterModel"
         >
         <template v-slot:before>
     <!-- Dropdown -->
+        <template>
         <div class="q-pa-md dropdown-button">
             <q-btn-dropdown
             flat
             class="glossy"
             color="primary"
-            :label="button === false ? 'LEAGUE SELECTORS' : dropdownName"
+            :label='dropdownName' 
             >
-        <q-list>
-            <q-item clickable v-close-popup @click="onItemClick('NFL') ">
+            <q-list>
+            <q-item clickable v-close-popup @click="onItemClick('NFL')">
             <q-item-section avatar>
                 <q-avatar icon="fas fa-football-ball" color="primary" text-color="white" />
             </q-item-section>
@@ -40,6 +42,7 @@
         </q-list>
         </q-btn-dropdown>
         </div>
+        </template>
         <q-separator color="primary" inset />
         <br/>
         <!--  -->
@@ -49,9 +52,9 @@
         class="icon-color"
         indicator-color="primary"
         >
-        <q-tab name="schedule" label="Schedule" icon='fas fa-calendar-alt' />
-        <q-tab name="teams" icon="fab fa-teamspeak" label="Teams" />
-        <q-tab name="athletics" icon="fas fa-running" label="Athletics" />
+        <q-tab name="schedule" label="Schedule" icon='fas fa-calendar-alt' @click="tabClicked('schedule')" />
+        <q-tab name="teams" icon="fab fa-teamspeak" label="Teams" @click="tabClicked('teams')"/>
+        <q-tab name="athletics" icon="fas fa-running" label="Athletics" @click="tabClicked('athletics')" />
         </q-tabs>
         </template>
         <template v-slot:after>
@@ -108,7 +111,9 @@
 
 <script>
 import ScheduleTable from './ScheduleTable/table';
+import {mapActions, mapGetters} from "vuex";
 export default {
+    name: 'leagues',
     components: {
         ScheduleTable,
     },
@@ -118,15 +123,35 @@ export default {
         splitterModel: 20, 
         dropdownName: '',
         button: false,
+        history: false,
         }
     },
+    created() {
+        this.checkHistory()
+    },
+    computed: {
+    ...mapGetters(['getLeagueVal', 'getTabVal'])
+    },
     methods: {
+    ...mapActions(['setLeagueValue', 'setTabVal']),    
     onItemClick(val) {
         this.button = true
-        console.log("VAL", val)
         this.dropdownName = val
+        this.setLeagueValue(val)
+    },
+    tabClicked(val) {
+    this.innerTab = val
+    this.setTabVal(val)
+    },
+    checkHistory() {
+        if (this.getLeagueVal.length !=0) {
+            this.history = true;
+            this.dropdownName = this.getLeagueVal
+        } else {
+            this.dropdownName = 'LEAGUE SELECTORS'
+        }
     }
-  }
+  },
 }
 </script>
 
